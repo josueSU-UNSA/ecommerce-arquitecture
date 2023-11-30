@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from cart.models import Cart, CartItem, Order,ItemOrder
+from cart.models import Cart, CartItem, Order, ItemOrder
 from products.models import Product
 
 
@@ -27,10 +27,7 @@ def add_to_cart(request, product_id):
 
 def make_order(request):
     cart = Cart.objects.get(usuario=request.user)
-    total = sum(
-        item.producto.precio * item.cantidad for item in cart.itemcart_set.all()
-    )
-
+    total = sum(item.product.price * item.quantity for item in cart.itemcart_set.all())
     order = Order.objects.create(usuario=request.user.perfilusuario, total=total)
 
     for item in cart.itemcart_set.all():
