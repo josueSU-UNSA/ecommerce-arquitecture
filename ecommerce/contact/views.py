@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-from django.contrib import messages
 from contact.models import ContactMessage
 
 
@@ -13,3 +12,7 @@ def send_message(request):
         form = ContactMessage()
 
     return render(request, "contact/send_message.html", {"form": form})
+
+
+def sent_message(request):
+    return render(request, "contact/sent_message.html")
